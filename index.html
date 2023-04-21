@@ -70,9 +70,10 @@
             const wrappedCopy = Autolinker.link(htmlEntities(rawCopy), {
                 urls: {
                     schemeMatches: true,
-                    wwwMatches: true,
+
                     tldMatches: true,
                 },
+                stripPrefix: false,
                 email: true,
                 phone: false,
             });
