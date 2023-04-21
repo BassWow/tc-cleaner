@@ -82,7 +82,9 @@
                 },
                 replaceFn: function (match) {
                     const tag = match.buildTag();
-                    tag.deleteAttr('rel'); // Remove the 'rel' attribute completely
+                    const attrs = tag.getAttrs();
+                    delete attrs.rel; // Remove the 'rel' attribute
+                    tag.setAttrs(attrs);
                     return tag;
                 },
                 newWindow: true,
