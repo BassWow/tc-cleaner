@@ -47,7 +47,7 @@
             const rawCopy = document.getElementById('inputCopy').value;
 
             const wrappedCopy = htmlEntities(rawCopy).replace(
-                /(https?:\/\/|www\.)[^\s]+/gi,
+                /(https?:\/\/|www\.)[^\s.,;:!?)]*(?:\([^\s)]+\)[^\s.,;:!?)]*)?/gi,
                 (match, p1) => {
                     const prefix = p1.startsWith("http") ? "" : "https://";
                     return `<a href="${prefix}${match}" target="_blank">${match}</a>`;
