@@ -80,6 +80,12 @@
 
                     tldMatches: true,
                 },
+                replaceFn: function (match) {
+                    const tag = match.buildTag();
+                    tag.setAttr('rel', null); // Remove the 'rel' attribute
+                    return tag;
+                },
+                newWindow: true,
                 stripPrefix: false,
                 email: true,
                 phone: false,
