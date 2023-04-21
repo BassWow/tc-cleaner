@@ -22,12 +22,14 @@
                             <label for="inputCopy" class="form-label">Enter the copy:</label>
                             <textarea class="form-control" id="inputCopy" rows="5"
                                 aria-label="Enter the copy"></textarea>
+                            <button type="button" class="btn btn-primary mb-3" onclick="formatCopy()"
+                                aria-label="Format copy">Format Copy</button>
                         </div>
-                        <button type="button" class="btn btn-primary mb-3" onclick="formatCopy()"
-                            aria-label="Format copy">Format Copy</button>
-                        <label for="result" class="form-label">Result:</label>
-                        <textarea class="form-control" id="result" rows="5" readonly
-                            aria-label="Formatted copy"></textarea>
+                        <div>
+                            <label for="result" class="form-label">Result:</label>
+                            <textarea class="form-control" id="result" rows="5" readonly
+                                aria-label="Formatted copy"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,7 +48,10 @@
 
             const wrappedCopy = htmlEntities(rawCopy).replace(
                 /(https?:\/\/|www\.)[^\s]+/gi,
-                '<a href="$&" target="_blank">$&</a>'
+                (match, p1) => {
+                    const prefix = p1.startsWith("http") ? "" : "https://";
+                    return `<a href="${prefix}${match}" target="_blank">${match}</a>`;
+                }
             );
 
             document.getElementById('result').value = `<p>${wrappedCopy}</p>`;
